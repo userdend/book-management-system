@@ -4,6 +4,15 @@ import BookService from "../../../application/services/BookService";
 export default class BookController {
   private bookService = new BookService();
 
+  getAll = async (req: Request, res: Response) => {
+    try {
+      const books = await this.bookService.getAllBooks();
+      res.status(201).json(books);
+    } catch (error) {
+      res.status(400).json({ error: "Books retrieval failed." });
+    }
+  };
+
   register = async (req: Request, res: Response) => {
     try {
       const {

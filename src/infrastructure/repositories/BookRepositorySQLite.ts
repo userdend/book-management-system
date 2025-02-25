@@ -3,22 +3,6 @@ import Book from "../../domain/entities/Book";
 import db from "../db/database";
 
 export default class BookRepositorySQLite implements BookRepository {
-  async create(book: Book): Promise<Book> {
-    const stmt = db.prepare("");
-    const info = stmt.run();
-    return new Book(
-      info.lastInsertRowid as number,
-      book.title,
-      book.isbn,
-      book.author,
-      book.pulisher,
-      book.category,
-      book.rack,
-      book.noOfCopy,
-      book.updatedOn
-    );
-  }
-
   async findAll(): Promise<Book[]> {
     const rows = db.prepare("SELECT * FROM books").all();
     return rows.map(
@@ -34,6 +18,33 @@ export default class BookRepositorySQLite implements BookRepository {
           row.noOfCopy,
           row.updatedOn
         )
+    );
+  }
+
+  async create(book: Book): Promise<Book> {
+    const stmt = db.prepare(
+      "INSERT INTO books (title, isbn, author, publisher, category, rack, noOfCopy, updatedOn) VALUES (?, ?, ?, ?, ?, ?, ?, ?)"
+    );
+    const info = stmt.run(
+      book.title,
+      book.isbn,
+      book.author,
+      book.pulisher,
+      book.category,
+      book.rack,
+      book.noOfCopy,
+      book.updatedOn
+    );
+    return new Book(
+      info.lastInsertRowid as number,
+      book.title,
+      book.isbn,
+      book.author,
+      book.pulisher,
+      book.category,
+      book.rack,
+      book.noOfCopy,
+      book.updatedOn
     );
   }
 }

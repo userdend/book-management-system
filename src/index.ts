@@ -5,7 +5,7 @@ const app = express();
 
 app.use(express.json());
 
-app.use("books", bookRoutes);
+app.use("/api", bookRoutes);
 
 app.get("/", (req: Request, res: Response) => {
   res.status(200).json(`Server is live.`);
