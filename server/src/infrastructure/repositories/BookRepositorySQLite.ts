@@ -1,6 +1,6 @@
-import { BookRepository } from "../../domain/repositories/BookRepository";
-import Book from "../../domain/entities/Book";
 import db from "../db/database";
+import Book from "../../domain/entities/Book";
+import { BookRepository } from "../../domain/repositories/BookRepository";
 
 export default class BookRepositorySQLite implements BookRepository {
   async findAll(): Promise<Book[]> {

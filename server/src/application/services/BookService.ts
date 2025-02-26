@@ -1,8 +1,8 @@
-import FindAllBooks from "../../domain/use-cases/FindAllBooks";
-import FindBook from "../../domain/use-cases/FindBook";
-import CreateBook from "../../domain/use-cases/CreateBook";
-import UpdateBook from "../../domain/use-cases/UpdateBook";
-import DeleteBook from "../../domain/use-cases/DeleteBook";
+import FindAllBooks from "../../domain/use-cases/book/FindAllBooks";
+import FindBook from "../../domain/use-cases/book/FindBook";
+import CreateBook from "../../domain/use-cases/book/CreateBook";
+import UpdateBook from "../../domain/use-cases/book/UpdateBook";
+import DeleteBook from "../../domain/use-cases/book/DeleteBook";
 import BookRepositorySQLite from "../../infrastructure/repositories/BookRepositorySQLite";
 
 export default class BookService {

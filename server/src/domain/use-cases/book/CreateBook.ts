@@ -1,11 +1,10 @@
-import Book from "../entities/Book";
-import { BookRepository } from "../repositories/BookRepository";
+import Book from "../../entities/Book";
+import { BookRepository } from "../../repositories/BookRepository";
 
-export default class UpdateBook {
+export default class CreateBook {
   constructor(private bookRepository: BookRepository) {}
 
   async execute(
-    id: number,
     title: string,
     isbn: string,
     author: string,
@@ -14,9 +13,9 @@ export default class UpdateBook {
     rack: string,
     noOfCopy: number,
     updatedOn: Date
-  ): Promise<any> {
+  ): Promise<Book> {
     const book = new Book(
-      id,
+      0,
       title,
       isbn,
       author,
@@ -26,6 +25,6 @@ export default class UpdateBook {
       noOfCopy,
       updatedOn
     );
-    return this.bookRepository.update(book);
+    return this.bookRepository.create(book);
   }
 }
