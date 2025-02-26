@@ -1,6 +1,4 @@
-node_modules/
-
+server/node_modules/
 # Assume PaaS with build step.
-dist/
-
-.env
+server/dist/
+server/.env
