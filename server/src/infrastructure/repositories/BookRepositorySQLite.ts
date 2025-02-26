@@ -21,6 +21,22 @@ export default class BookRepositorySQLite implements BookRepository {
     );
   }
 
+  async find(isbn: string): Promise<Book> {
+    const stmt = db.prepare("SELECT * FROM books WHERE isbn = ?");
+    const book: any = stmt.get(isbn);
+    return new Book(
+      book.id,
+      book.title,
+      book.isbn,
+      book.author,
+      book.publisher,
+      book.category,
+      book.rack,
+      book.noOfCopy,
+      book.updatedOn
+    );
+  }
+
   async create(book: Book): Promise<Book> {
     const stmt = db.prepare(
       "INSERT INTO books (title, isbn, author, publisher, category, rack, noOfCopy, updatedOn) VALUES (?, ?, ?, ?, ?, ?, ?, ?)"

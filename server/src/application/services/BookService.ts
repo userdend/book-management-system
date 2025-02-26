@@ -1,19 +1,26 @@
-import CreateBook from "../../domain/use-cases/CreateBook";
 import FindAllBooks from "../../domain/use-cases/FindAllBooks";
+import FindBook from "../../domain/use-cases/FindBook";
+import CreateBook from "../../domain/use-cases/CreateBook";
 import BookRepositorySQLite from "../../infrastructure/repositories/BookRepositorySQLite";
 
 export default class BookService {
-  private createBook: CreateBook;
   private findAllBooks: FindAllBooks;
+  private findBook: FindBook;
+  private createBook: CreateBook;
 
   constructor() {
     const bookRepository = new BookRepositorySQLite();
-    this.createBook = new CreateBook(bookRepository);
     this.findAllBooks = new FindAllBooks(bookRepository);
+    this.findBook = new FindBook(bookRepository);
+    this.createBook = new CreateBook(bookRepository);
   }
 
   async getAllBooks() {
     return this.findAllBooks.execute();
+  }
+
+  async getBook(isbn: string) {
+    return this.findBook.execute(isbn);
   }
 
   async registerBook(
