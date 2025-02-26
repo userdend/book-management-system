@@ -7,7 +7,10 @@
     "start": "node dist/index.js",
     "build": "tsc",
     "dev": "nodemon",
-    "seed": "npx ts-node src/infrastructure/db/seed.ts"
+    "seed": "npx ts-node src/infrastructure/db/seed.ts",
+    "create-migrate": "npx ts-node src/infrastructure/db/createMigration.ts",
+    "run-migration": "npx ts-node src/infrastructure/db/runMigration.ts",
+    "rollback-migration": "npx ts-node src/infrastructure/db/rollbackMigration.ts"
   },
   "keywords": [],
   "author": "",
@@ -17,6 +20,7 @@
     "@types/better-sqlite3": "^7.6.12",
     "@types/express": "^5.0.0",
     "@types/node": "^22.13.5",
+    "@types/umzug": "^2.3.9",
     "nodemon": "^3.1.9",
     "ts-node": "^10.9.2",
     "typescript": "^5.7.3"
@@ -24,6 +28,7 @@
   "dependencies": {
     "better-sqlite3": "^11.8.1",
     "dotenv": "^16.4.7",
-    "express": "^4.21.2"
+    "express": "^4.21.2",
+    "umzug": "^3.8.2"
   }
 }
