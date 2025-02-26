@@ -4,7 +4,7 @@ export default class Book {
     public title: string,
     public isbn: string,
     public author: string,
-    public pulisher: string,
+    public publisher: string,
     public category: string,
     public rack: string,
     public noOfCopy: number,

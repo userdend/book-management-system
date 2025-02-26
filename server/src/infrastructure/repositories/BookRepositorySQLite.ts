@@ -45,7 +45,7 @@ export default class BookRepositorySQLite implements BookRepository {
       book.title,
       book.isbn,
       book.author,
-      book.pulisher,
+      book.publisher,
       book.category,
       book.rack,
       book.noOfCopy,
@@ -56,12 +56,29 @@ export default class BookRepositorySQLite implements BookRepository {
       book.title,
       book.isbn,
       book.author,
-      book.pulisher,
+      book.publisher,
       book.category,
       book.rack,
       book.noOfCopy,
       book.updatedOn
     );
+  }
+
+  async update(book: Book): Promise<any> {
+    const stmt = db.prepare(
+      "UPDATE books SET title = ?, author = ?, publisher = ?, category = ?, rack = ?, noOfCopy = ?, updatedOn = CURRENT_TIMESTAMP WHERE isbn = ?"
+    );
+    const result = stmt.run(
+      book.title,
+      book.author,
+      book.publisher,
+      book.category,
+      book.rack,
+      book.noOfCopy,
+      book.updatedOn,
+      book.isbn
+    );
+    return result.changes;
   }
 
   async delete(isbn: string): Promise<any> {

@@ -29,7 +29,7 @@ export default class BookController {
         title,
         isbn,
         author,
-        pulisher,
+        publisher,
         category,
         rack,
         noOfCopy,
@@ -39,7 +39,7 @@ export default class BookController {
         title,
         isbn,
         author,
-        pulisher,
+        publisher,
         category,
         rack,
         noOfCopy,
@@ -48,6 +48,36 @@ export default class BookController {
       res.status(201).json(book);
     } catch (error) {
       res.status(400).json({ error: "Book creation failed." });
+    }
+  };
+
+  update = async (req: Request, res: Response) => {
+    try {
+      const {
+        id,
+        title,
+        isbn,
+        author,
+        publisher,
+        category,
+        rack,
+        noOfCopy,
+        updatedOn,
+      } = req.body;
+      const book = await this.bookService.editBook(
+        id,
+        title,
+        isbn,
+        author,
+        publisher,
+        category,
+        rack,
+        noOfCopy,
+        updatedOn
+      );
+      res.status(201).json(book);
+    } catch (error) {
+      res.status(400).json({ error: "Book updating failed." });
     }
   };
 
