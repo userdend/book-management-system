@@ -63,4 +63,10 @@ export default class BookRepositorySQLite implements BookRepository {
       book.updatedOn
     );
   }
+
+  async delete(isbn: string): Promise<any> {
+    const stmt = db.prepare("DELETE FROM books WHERE isbn = ?");
+    const result = stmt.run(isbn);
+    return result.changes;
+  }
 }

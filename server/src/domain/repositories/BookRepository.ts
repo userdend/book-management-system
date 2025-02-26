@@ -4,4 +4,5 @@ export interface BookRepository {
   findAll(): Promise<Book[]>;
   find(isbn: string): Promise<Book>;
   create(book: Book): Promise<Book>;
+  delete(isbn: string): Promise<any>;
 }

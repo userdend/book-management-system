@@ -50,4 +50,14 @@ export default class BookController {
       res.status(400).json({ error: "Book creation failed." });
     }
   };
+
+  remove = async (req: Request, res: Response) => {
+    try {
+      const { isbn } = req.body;
+      const result = await this.bookService.removeBook(isbn);
+      res.status(201).json(result);
+    } catch (error) {
+      res.status(400).json({ error: "Book removal failed." });
+    }
+  };
 }
