@@ -14,8 +14,20 @@ const filePath = path.join(__dirname, "migrations", fileName);
 const template = `
     import { Database } from 'better-sqlite3';
     module.exports = {
-        up: async ({ context: db }: { context: Database }) => {},
-        down: async ({ context: db }: { context: Database }) => {},
+        up: async ({ context: db }: { context: Database }) => {
+          try{
+          }
+          catch(error: any) {
+            console.error(error.message);
+          }
+        },
+        down: async ({ context: db }: { context: Database }) => {
+          try{
+          }
+          catch(error: any) {
+            console.error(error.message);
+          }
+        },
     };
 `;
 

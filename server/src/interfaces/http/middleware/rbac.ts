@@ -12,11 +12,13 @@ export const authorize = (requiredPermission: string) => {
       res.status(401).json({ error: "Unauthorized." });
       return;
     }
-
+    console.log(userId);
     const roles = roleRepository.getRoleByUserId(userId);
+    console.log(roles);
     const permissions = roles.flatMap((role) =>
       roleRepository.getPermissionsByRole(role.id)
     );
+    console.log(permissions);
 
     if (!permissions.includes(requiredPermission)) {
       res.status(403).json({ error: "Forbidden: Insufficient permissions." });
