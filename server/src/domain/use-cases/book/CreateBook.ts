@@ -13,7 +13,7 @@ export default class CreateBook {
     rack: string,
     noOfCopy: number,
     updatedOn: Date
-  ): Promise<Book> {
+  ): Promise<void> {
     const book = new Book(
       0,
       title,
@@ -25,6 +25,6 @@ export default class CreateBook {
       noOfCopy,
       updatedOn
     );
-    return this.bookRepository.create(book);
+    this.bookRepository.create(book);
   }
 }

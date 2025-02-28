@@ -3,8 +3,12 @@ import Book from "../../domain/entities/Book";
 import { BookRepository } from "../../domain/repositories/BookRepository";
 
 export default class BookRepositorySQLite implements BookRepository {
-  async findAll(): Promise<Book[]> {
-    const rows = db.prepare("SELECT * FROM books").all();
+  async findAll(pageNumber: number): Promise<Book[]> {
+    const limit = 10;
+    const offset = (pageNumber - 1) * limit;
+    const rows = db
+      .prepare("SELECT * FROM books LIMIT ? OFFSET ?")
+      .all(limit, offset);
     return rows.map(
       (row: any) =>
         new Book(
@@ -21,9 +25,9 @@ export default class BookRepositorySQLite implements BookRepository {
     );
   }
 
-  async find(isbn: string): Promise<Book> {
-    const stmt = db.prepare("SELECT * FROM books WHERE isbn = ?");
-    const book: any = stmt.get(isbn);
+  async find(bookId: number): Promise<Book> {
+    const stmt = db.prepare("SELECT * FROM books WHERE id = ?");
+    const book: any = stmt.get(bookId);
     return new Book(
       book.id,
       book.title,
@@ -37,22 +41,11 @@ export default class BookRepositorySQLite implements BookRepository {
     );
   }
 
-  async create(book: Book): Promise<Book> {
+  async create(book: Book): Promise<void> {
     const stmt = db.prepare(
       "INSERT INTO books (title, isbn, author, publisher, category, rack, noOfCopy, updatedOn) VALUES (?, ?, ?, ?, ?, ?, ?, ?)"
     );
-    const info = stmt.run(
-      book.title,
-      book.isbn,
-      book.author,
-      book.publisher,
-      book.category,
-      book.rack,
-      book.noOfCopy,
-      book.updatedOn
-    );
-    return new Book(
-      info.lastInsertRowid as number,
+    stmt.run(
       book.title,
       book.isbn,
       book.author,
@@ -64,26 +57,25 @@ export default class BookRepositorySQLite implements BookRepository {
     );
   }
 
-  async update(book: Book): Promise<any> {
+  async update(book: Book): Promise<void> {
     const stmt = db.prepare(
-      "UPDATE books SET title = ?, author = ?, publisher = ?, category = ?, rack = ?, noOfCopy = ?, updatedOn = CURRENT_TIMESTAMP WHERE isbn = ?"
+      "UPDATE books SET title = ?, isbn = ?, author = ?, publisher = ?, category = ?, rack = ?, noOfCopy = ?, updatedOn = CURRENT_TIMESTAMP WHERE id = ?"
     );
-    const result = stmt.run(
+    stmt.run(
       book.title,
+      book.isbn,
       book.author,
       book.publisher,
       book.category,
       book.rack,
       book.noOfCopy,
       book.updatedOn,
-      book.isbn
+      book.id
     );
-    return result.changes;
   }
 
-  async delete(isbn: string): Promise<any> {
-    const stmt = db.prepare("DELETE FROM books WHERE isbn = ?");
-    const result = stmt.run(isbn);
-    return result.changes;
+  async delete(bookId: number): Promise<void> {
+    const stmt = db.prepare("DELETE FROM books WHERE id = ?");
+    stmt.run(bookId);
   }
 }

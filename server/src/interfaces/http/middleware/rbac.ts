@@ -6,14 +6,14 @@ const roleRepository = new RoleRepositorySQLite(db);
 
 export const authorize = (requiredPermission: string) => {
   return (req: Request, res: Response, next: NextFunction) => {
-    const { userId } = req.body;
+    const { id } = req.body.user;
 
-    if (!userId) {
+    if (!id) {
       res.status(401).json({ error: "Unauthorized." });
       return;
     }
 
-    const roles = roleRepository.getRoleByUserId(userId);
+    const roles = roleRepository.getRoleByUserId(id);
 
     const permissions = roles.flatMap((role) =>
       roleRepository.getPermissionsByRole(role.id)

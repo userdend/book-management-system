@@ -6,7 +6,8 @@ export default class BookController {
 
   getAll = async (req: Request, res: Response) => {
     try {
-      const books = await this.bookService.getAllBooks();
+      const { page } = req.body;
+      const books = await this.bookService.getAllBooks(page);
       res.status(201).json(books);
     } catch (error) {
       res.status(400).json({ error: "Books retrieval failed." });
@@ -15,8 +16,8 @@ export default class BookController {
 
   get = async (req: Request, res: Response) => {
     try {
-      const { isbn } = req.params;
-      const book = await this.bookService.getBook(isbn);
+      const { id } = req.params;
+      const book = await this.bookService.getBook(parseInt(id));
       res.status(201).json(book);
     } catch (error) {
       res.status(400).json({ error: "Book retrieval failed." });
@@ -34,8 +35,8 @@ export default class BookController {
         rack,
         noOfCopy,
         updatedOn,
-      } = req.body;
-      const book = await this.bookService.registerBook(
+      } = req.body.book;
+      await this.bookService.registerBook(
         title,
         isbn,
         author,
@@ -45,7 +46,7 @@ export default class BookController {
         noOfCopy,
         updatedOn
       );
-      res.status(201).json(book);
+      res.status(201).json({ message: "Book creation success." });
     } catch (error) {
       res.status(400).json({ error: "Book creation failed." });
     }
@@ -63,8 +64,8 @@ export default class BookController {
         rack,
         noOfCopy,
         updatedOn,
-      } = req.body;
-      const book = await this.bookService.editBook(
+      } = req.body.book;
+      await this.bookService.editBook(
         id,
         title,
         isbn,
@@ -75,7 +76,7 @@ export default class BookController {
         noOfCopy,
         updatedOn
       );
-      res.status(201).json(book);
+      res.status(201).json({ message: "Book updating success." });
     } catch (error) {
       res.status(400).json({ error: "Book updating failed." });
     }
@@ -83,9 +84,9 @@ export default class BookController {
 
   remove = async (req: Request, res: Response) => {
     try {
-      const { isbn } = req.body;
-      const result = await this.bookService.removeBook(isbn);
-      res.status(201).json(result);
+      const { id } = req.body.book;
+      await this.bookService.removeBook(id);
+      res.status(201).json({ message: "Book removal success." });
     } catch (error) {
       res.status(400).json({ error: "Book removal failed." });
     }

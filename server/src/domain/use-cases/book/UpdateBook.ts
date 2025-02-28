@@ -14,7 +14,7 @@ export default class UpdateBook {
     rack: string,
     noOfCopy: number,
     updatedOn: Date
-  ): Promise<any> {
+  ): Promise<void> {
     const book = new Book(
       id,
       title,
@@ -26,6 +26,6 @@ export default class UpdateBook {
       noOfCopy,
       updatedOn
     );
-    return this.bookRepository.update(book);
+    this.bookRepository.update(book);
   }
 }

@@ -21,12 +21,12 @@ export default class BookService {
     this.deleteBook = new DeleteBook(bookRepository);
   }
 
-  async getAllBooks() {
-    return this.findAllBooks.execute();
+  async getAllBooks(pageNumber: number) {
+    return this.findAllBooks.execute(pageNumber);
   }
 
-  async getBook(isbn: string) {
-    return this.findBook.execute(isbn);
+  async getBook(bookId: number) {
+    return this.findBook.execute(bookId);
   }
 
   async registerBook(
@@ -39,7 +39,7 @@ export default class BookService {
     noOfCopy: number,
     updatedOn: Date
   ) {
-    return this.createBook.execute(
+    this.createBook.execute(
       title,
       isbn,
       author,
@@ -62,7 +62,7 @@ export default class BookService {
     noOfCopy: number,
     updatedOn: Date
   ) {
-    return this.updateBook.execute(
+    this.updateBook.execute(
       id,
       title,
       isbn,
@@ -75,7 +75,7 @@ export default class BookService {
     );
   }
 
-  async removeBook(isbn: string) {
-    return this.deleteBook.execute(isbn);
+  async removeBook(bookId: number) {
+    this.deleteBook.execute(bookId);
   }
 }
