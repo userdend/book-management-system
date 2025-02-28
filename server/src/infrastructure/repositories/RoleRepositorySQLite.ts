@@ -16,7 +16,8 @@ export class RoleRepositorySQLite implements RoleRepository {
   getPermissionsByRole(roleId: number): string[] {
     const rows = this.db
       .prepare(
-        `SELECT p.name FROM permissions p JOIN role_permissions rp ON p.id = rp.permission_id`
+        `SELECT p.name FROM permissions p JOIN role_permissions rp ON p.id = rp.permission_id
+         WHERE rp.role_id = ?`
       )
       .all(roleId);
     return rows.map((row: any) => row.name);

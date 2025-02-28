@@ -2,5 +2,5 @@ GET http://localhost:3000/api/books
 Content-Type: application/json
 
 {
-    "userId": 300
+    "userId": 1
 }

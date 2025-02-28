@@ -1,5 +1,7 @@
 [
   "20250226114455668-drop-table.ts",
   "20250226161652794-implement-rbac.ts",
-  "20250227004031387-seed-permission-role.ts"
+  "20250227004031387-seed-permission-role.ts",
+  "20250228021814367-create-users-table.ts",
+  "20250228023914926-seed-admin-details.ts"
 ]
