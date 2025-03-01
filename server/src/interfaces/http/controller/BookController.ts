@@ -6,8 +6,8 @@ export default class BookController {
 
   getAll = async (req: Request, res: Response) => {
     try {
-      const { page } = req.params;
-      const books = await this.bookService.getAllBooks(parseInt(page) || 1);
+      const { page } = req.query;
+      const books = await this.bookService.getAllBooks(Number(page) || 1);
       res.status(201).json(books);
     } catch (error) {
       res.status(400).json({ error: "Books retrieval failed." });

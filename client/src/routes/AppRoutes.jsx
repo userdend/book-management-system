@@ -7,7 +7,7 @@ const AppRoutes = () => {
     <Router>
       <Routes>
         <Route index element={<Home />} />
-        <Route path="books/*" element={<BookRoutes />} />
+        <Route path="/*" element={<BookRoutes />} />
       </Routes>
     </Router>
   );
