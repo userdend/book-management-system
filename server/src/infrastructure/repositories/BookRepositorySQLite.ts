@@ -4,7 +4,7 @@ import { BookRepository } from "../../domain/repositories/BookRepository";
 
 export default class BookRepositorySQLite implements BookRepository {
   async findAll(pageNumber: number): Promise<Book[]> {
-    const limit = 10;
+    const limit = 5;
     const offset = (pageNumber - 1) * limit;
     const rows = db
       .prepare("SELECT * FROM books LIMIT ? OFFSET ?")

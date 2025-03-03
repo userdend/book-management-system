@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
-import { Link, useSearchParams } from "react-router-dom";
+import { Link, useSearchParams, useLocation } from "react-router-dom";
 import { getBooks } from "../services/bookService";
 
 const BookList = () => {
+  const location = useLocation();
   const [searchParams] = useSearchParams();
   const currentPage = Number(
     searchParams.get("page") < 1 ? 1 : searchParams.get("page")
@@ -12,7 +13,7 @@ const BookList = () => {
 
   useEffect(() => {
     fetchBooks();
-  }, []);
+  }, [location.search]);
 
   const fetchBooks = async () => {
     const data = await getBooks(currentPage);
