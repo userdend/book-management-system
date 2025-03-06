@@ -8,9 +8,9 @@ export default class BookRepositorySQLite implements BookRepository {
     const offset = (pageNumber - 1) * limit;
     const rows = db
       .prepare("SELECT * FROM books LIMIT ? OFFSET ?")
-      .all(limit, offset);
+      .all(limit, offset) as Book[];
     return rows.map(
-      (row: any) =>
+      (row: Book) =>
         new Book(
           row.id,
           row.title,
@@ -27,17 +27,22 @@ export default class BookRepositorySQLite implements BookRepository {
 
   async find(bookId: number): Promise<Book> {
     const stmt = db.prepare("SELECT * FROM books WHERE id = ?");
-    const book: any = stmt.get(bookId);
+    const row: Book = (stmt.get(bookId) as Book) || undefined;
+
+    if (!row) {
+      throw new Error(`Book with ID ${bookId} not found.`);
+    }
+
     return new Book(
-      book.id,
-      book.title,
-      book.isbn,
-      book.author,
-      book.publisher,
-      book.category,
-      book.rack,
-      book.noOfCopy,
-      book.updatedOn
+      row.id,
+      row.title,
+      row.isbn,
+      row.author,
+      row.publisher,
+      row.category,
+      row.rack,
+      row.noOfCopy,
+      row.updatedOn
     );
   }
 
@@ -69,7 +74,6 @@ export default class BookRepositorySQLite implements BookRepository {
       book.category,
       book.rack,
       book.noOfCopy,
-      book.updatedOn,
       book.id
     );
   }

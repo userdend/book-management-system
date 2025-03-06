@@ -1,6 +1,7 @@
 const GET_ALL_BOOKS = import.meta.env.VITE_API_GET_ALL_BOOKS;
 const GET_BOOK = import.meta.env.VITE_API_GET_BOOK;
 const ADD_BOOK = import.meta.env.VITE_API_ADD_BOOK;
+const UPDATE_BOOK = import.meta.env.VITE_API_UPDATE_BOOK;
 
 export const getBooks = async (page) => {
   try {
@@ -43,6 +44,25 @@ export const createBook = async (user, book) => {
   }
 };
 
-export const updateBook = async () => {};
+export const updateBook = async (user, book) => {
+  try {
+    const response = await fetch(`${UPDATE_BOOK}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        user: {
+          id: user.id,
+        },
+        book: book,
+      }),
+    });
+    const status = await response.json();
+    return status;
+  } catch (error) {
+    console.error(error);
+  }
+};
 
 export const deleteBook = async () => {};

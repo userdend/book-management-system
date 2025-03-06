@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { getBook } from "../services/bookService";
+import { getBook, updateBook } from "../services/bookService";
 
 const UpdateBook = () => {
   const { id } = useParams();
@@ -15,39 +15,93 @@ const UpdateBook = () => {
     setBook(data);
   };
 
+  const handleChange = (e) => {
+    setBook({
+      ...book,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    await updateBook({ id: 1 }, book);
+  };
+
   return (
     <>
       <Link to={"/books"}>
         <button>List</button>
       </Link>
-      <form action="" method="post">
+      <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="">Title:</label>
-          <input type="text" placeholder="Title" value={book.title} />
+          <input
+            type="text"
+            name="title"
+            placeholder="Title"
+            value={book.title}
+            onChange={handleChange}
+          />
         </div>
         <div>
           <label htmlFor="">ISBN:</label>
-          <input type="text" placeholder="ISBN" value={book.isbn} />
+          <input
+            type="text"
+            name="isbn"
+            placeholder="ISBN"
+            value={book.isbn}
+            onChange={handleChange}
+          />
         </div>
         <div>
           <label htmlFor="">Author:</label>
-          <input type="text" placeholder="Author" value={book.author} />
+          <input
+            type="text"
+            name="author"
+            placeholder="Author"
+            value={book.author}
+            onChange={handleChange}
+          />
         </div>
         <div>
           <label htmlFor="">Publisher:</label>
-          <input type="text" placeholder="Publisher" value={book.publisher} />
+          <input
+            type="text"
+            name="publisher"
+            placeholder="Publisher"
+            value={book.publisher}
+            onChange={handleChange}
+          />
         </div>
         <div>
           <label htmlFor="">Category:</label>
-          <input type="text" placeholder="Category" value={book.category} />
+          <input
+            type="text"
+            name="category"
+            placeholder="Category"
+            value={book.category}
+            onChange={handleChange}
+          />
         </div>
         <div>
           <label htmlFor="">Rack:</label>
-          <input type="text" placeholder="Rack" value={book.rack} />
+          <input
+            type="text"
+            name="rack"
+            placeholder="Rack"
+            value={book.rack}
+            onChange={handleChange}
+          />
         </div>
         <div>
           <label htmlFor="">Copies:</label>
-          <input type="text" placeholder="Copies" value={book.noOfCopy} />
+          <input
+            type="text"
+            name="noOfCopy"
+            placeholder="Copies"
+            value={book.noOfCopy}
+            onChange={handleChange}
+          />
         </div>
         <div>
           <input type="submit" value={"Add"} />
