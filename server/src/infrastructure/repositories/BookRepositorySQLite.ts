@@ -6,23 +6,9 @@ export default class BookRepositorySQLite implements BookRepository {
   async findAll(pageNumber: number): Promise<Book[]> {
     const limit = 5;
     const offset = (pageNumber - 1) * limit;
-    const rows = db
+    return db
       .prepare("SELECT * FROM books LIMIT ? OFFSET ?")
       .all(limit, offset) as Book[];
-    return rows.map(
-      (row: Book) =>
-        new Book(
-          row.id,
-          row.title,
-          row.isbn,
-          row.author,
-          row.publisher,
-          row.category,
-          row.rack,
-          row.noOfCopy,
-          row.updatedOn
-        )
-    );
   }
 
   async find(bookId: number): Promise<Book> {
@@ -33,20 +19,11 @@ export default class BookRepositorySQLite implements BookRepository {
       throw new Error(`Book with ID ${bookId} not found.`);
     }
 
-    return new Book(
-      row.id,
-      row.title,
-      row.isbn,
-      row.author,
-      row.publisher,
-      row.category,
-      row.rack,
-      row.noOfCopy,
-      row.updatedOn
-    );
+    return row;
   }
 
   async create(book: Book): Promise<void> {
+    // Task: Insert if ISBN is not exists.
     const stmt = db.prepare(
       "INSERT INTO books (title, isbn, author, publisher, category, rack, noOfCopy, updatedOn) VALUES (?, ?, ?, ?, ?, ?, ?, ?)"
     );

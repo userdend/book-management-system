@@ -22,22 +22,22 @@ export default class CategoryService {
   }
 
   async getAllCategories() {
-    this.findAllCategories.execute();
+    return this.findAllCategories.execute();
   }
 
   async getCategory(categoryId: number) {
-    this.findCategory.execute(categoryId);
+    return this.findCategory.execute(categoryId);
   }
 
   async registerCategory(name: string) {
-    this.createCategory.execute(name);
+    return this.createCategory.execute(name);
   }
 
   async editCategory(id: number, name: string) {
-    this.updateCategory.execute(id, name);
+    return this.updateCategory.execute(id, name);
   }
 
   async removeCategory(categoryId: number) {
-    this.deleteCategory.execute(categoryId);
+    return this.deleteCategory.execute(categoryId);
   }
 }

@@ -4,8 +4,7 @@ import db from "../db/database";
 
 export default class CategoryRepositorySQLite implements CategoryRepository {
   async findAll(): Promise<Category[]> {
-    const rows = db.prepare(`SELECT * FROM categories`).all() as Category[];
-    return rows.map((row: Category) => new Category(row.id, row.name));
+    return db.prepare(`SELECT * FROM categories`).all() as Category[];
   }
 
   async find(categoryId: number): Promise<Category> {
@@ -16,7 +15,7 @@ export default class CategoryRepositorySQLite implements CategoryRepository {
       throw new Error(`Category with ID ${categoryId} not found.`);
     }
 
-    return new Category(row.id, row.name);
+    return row;
   }
 
   async create(category: Category): Promise<void> {

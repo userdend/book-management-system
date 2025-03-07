@@ -20,16 +20,42 @@ const ViewBook = () => {
       <Link to={"/books"}>
         <button>List</button>
       </Link>
-      <ul>
-        <li>{"ID: " + book.id}</li>
-        <li>{"Title: " + book.title}</li>
-        <li>{"ISBN: " + book.isbn}</li>
-        <li>{"Author: " + book.author}</li>
-        <li>{"Publisher: " + book.publisher}</li>
-        <li>{"Category: " + book.category}</li>
-        <li>{"Rack: " + book.rack}</li>
-        <li>{"Copies: " + book.noOfCopy}</li>
-      </ul>
+      <table border={1}>
+        <tbody>
+          <tr>
+            <td>ID</td>
+            <td>{book.id}</td>
+          </tr>
+          <tr>
+            <td>Title</td>
+            <td>{book.title}</td>
+          </tr>
+          <tr>
+            <td>ISBN</td>
+            <td>{book.isbn}</td>
+          </tr>
+          <tr>
+            <td>Author</td>
+            <td>{book.author}</td>
+          </tr>
+          <tr>
+            <td>Publisher</td>
+            <td>{book.publisher}</td>
+          </tr>
+          <tr>
+            <td>Category</td>
+            <td>{book.category}</td>
+          </tr>
+          <tr>
+            <td>Rack</td>
+            <td>{book.rack}</td>
+          </tr>
+          <tr>
+            <td>Copies</td>
+            <td>{book.noOfCopy}</td>
+          </tr>
+        </tbody>
+      </table>
     </>
   );
 };
