@@ -1,5 +1,5 @@
-import Book from "../../entities/Book";
-import { BookRepository } from "../../repositories/BookRepository";
+import Book from "../../../domain/entities/Book";
+import { BookRepository } from "../../../domain/repositories/BookRepository";
 
 export default class FindBook {
   constructor(private bookRepository: BookRepository) {}

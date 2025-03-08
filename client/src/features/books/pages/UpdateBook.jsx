@@ -33,7 +33,7 @@ const UpdateBook = () => {
   const handleSubmit = async (e) => {
     // Task: Filter user input.
     e.preventDefault();
-    await updateBook({ id: 1 }, book);
+    await updateBook(book);
   };
 
   return (

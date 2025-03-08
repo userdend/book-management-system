@@ -33,7 +33,7 @@ const ViewCategory = () => {
               <td>{category.id}</td>
               <td>{category.name}</td>
               <td>
-                <Link>
+                <Link to={`/category/${category.id}`}>
                   <button>Update</button>
                 </Link>
                 <Link>

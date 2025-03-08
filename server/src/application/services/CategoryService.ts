@@ -1,8 +1,8 @@
-import FindAllCategories from "../../domain/use-cases/category/FindAllCategories";
-import FindCategory from "../../domain/use-cases/category/FindCategory";
-import CreateCategory from "../../domain/use-cases/category/CreateCategory";
-import UpdateCategory from "../../domain/use-cases/category/UpdateCategory";
-import DeleteCategory from "../../domain/use-cases/category/DeleteCategory";
+import FindAllCategories from "../use-cases/category/FindAllCategories";
+import FindCategory from "../use-cases/category/FindCategory";
+import CreateCategory from "../use-cases/category/CreateCategory";
+import UpdateCategory from "../use-cases/category/UpdateCategory";
+import DeleteCategory from "../use-cases/category/DeleteCategory";
 import CategoryRepositorySQLite from "../../infrastructure/repositories/CategoryRepositorySQLite";
 
 export default class CategoryService {

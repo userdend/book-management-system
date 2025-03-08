@@ -1,5 +1,5 @@
-import { UserRead } from "../../entities/User";
-import { UserRepository } from "../../repositories/UserRepository";
+import { UserRead } from "../../../domain/entities/User";
+import { UserRepository } from "../../../domain/repositories/UserRepository";
 
 export default class FindAllUsers {
   constructor(private userRepository: UserRepository) {}

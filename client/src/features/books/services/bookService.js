@@ -3,6 +3,10 @@ const GET_BOOK = import.meta.env.VITE_API_GET_BOOK;
 const ADD_BOOK = import.meta.env.VITE_API_ADD_BOOK;
 const UPDATE_BOOK = import.meta.env.VITE_API_UPDATE_BOOK;
 
+const user = {
+  id: 1,
+};
+
 export const getBooks = async (page) => {
   try {
     const response = await fetch(`${GET_ALL_BOOKS}?page=${page}`);
@@ -23,7 +27,7 @@ export const getBook = async (id) => {
   }
 };
 
-export const createBook = async (user, book) => {
+export const createBook = async (book) => {
   try {
     const response = await fetch(`${ADD_BOOK}`, {
       method: "POST",
@@ -44,7 +48,7 @@ export const createBook = async (user, book) => {
   }
 };
 
-export const updateBook = async (user, book) => {
+export const updateBook = async (book) => {
   try {
     const response = await fetch(`${UPDATE_BOOK}`, {
       method: "PUT",

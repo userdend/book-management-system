@@ -15,9 +15,9 @@ export default class CategoryController {
 
   get = async (req: Request, res: Response) => {
     try {
-      const { id } = req.body.category;
-      const category = await this.categoryService.getCategory(id);
-      res.status(201).json();
+      const { id } = req.params;
+      const category = await this.categoryService.getCategory(parseInt(id));
+      res.status(201).json(category);
     } catch (error) {
       res.status(400).json({ error: "Category retrieval failed." });
     }

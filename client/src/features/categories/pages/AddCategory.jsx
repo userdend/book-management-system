@@ -1,31 +1,30 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { createCategory } from "../categoryService";
 
 const AddCategory = () => {
-  const [category, setCategory] = useState({});
+  const [category, setCategory] = useState({ name: "" });
+
+  const handleChange = (e) => {
+    setCategory({
+      ...category,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    await createCategory(category);
+  };
 
   return (
     <>
       <Link to={"/categories"}>
         <button>List</button>
       </Link>
-      <form>
+      <form onSubmit={handleSubmit}>
         <table border={1}>
           <tbody>
-            <tr>
-              <td>
-                <label htmlFor="">ID</label>
-              </td>
-              <td>
-                <input
-                  type="number"
-                  name="id"
-                  placeholder="ID"
-                  value={category.id}
-                  readOnly={true}
-                />
-              </td>
-            </tr>
             <tr>
               <td>
                 <label htmlFor="">Name</label>
@@ -36,6 +35,7 @@ const AddCategory = () => {
                   name="name"
                   placeholder="Name"
                   value={category.name}
+                  onChange={handleChange}
                 />
               </td>
             </tr>

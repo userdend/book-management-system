@@ -1,8 +1,8 @@
-import CreateUser from "../../domain/use-cases/user/CreateUser";
-import DeleteUser from "../../domain/use-cases/user/DeleteUser";
-import FindAllUsers from "../../domain/use-cases/user/FindAllUsers";
-import FindUser from "../../domain/use-cases/user/FindUser";
-import UpdateUser from "../../domain/use-cases/user/UpdateUser";
+import CreateUser from "../use-cases/user/CreateUser";
+import DeleteUser from "../use-cases/user/DeleteUser";
+import FindAllUsers from "../use-cases/user/FindAllUsers";
+import FindUser from "../use-cases/user/FindUser";
+import UpdateUser from "../use-cases/user/UpdateUser";
 import { UserRepositorySQLite } from "../../infrastructure/repositories/UserRepositorySQLite";
 
 export default class UserService {

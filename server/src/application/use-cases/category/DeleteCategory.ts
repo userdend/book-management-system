@@ -1,4 +1,4 @@
-import { CategoryRepository } from "../../repositories/CategoryRepository";
+import { CategoryRepository } from "../../../domain/repositories/CategoryRepository";
 
 export default class DeleteCategory {
   constructor(private categoryRepository: CategoryRepository) {}

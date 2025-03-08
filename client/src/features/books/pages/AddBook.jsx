@@ -36,7 +36,7 @@ const AddBook = () => {
   const handleSubmit = async (e) => {
     // Task: Filter user input.
     e.preventDefault();
-    await createBook({ id: 1 }, formData);
+    await createBook(formData);
   };
 
   return (
